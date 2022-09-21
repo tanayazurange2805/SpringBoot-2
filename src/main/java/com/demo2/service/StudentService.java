@@ -12,6 +12,6 @@ public interface StudentService {
 		
    public Optional<Student> updateStudent(Integer ID) ;
    
-   public void deleteStudent(Integer Id) ;
+   public String deleteStudent(int id) ;
 }
 
