@@ -1,5 +1,6 @@
 package com.demo2.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,14 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public Optional<Student> updateStudent(Integer Id) {
+	public Student updateStudent(Student student) {
+		Student getStudent=repository.findById(student.getId()).orElse( null);
+		getStudent.setName(student.getName());
+		getStudent.setBranch(student.getBranch());
+		getStudent.setGrade(student.getGrade());
+		getStudent.setMarks(student.getMarks());
 		
-		return repository.findById(Id);
+		return repository.save(getStudent);
 	}
 
 	@Override
@@ -39,5 +45,15 @@ public class StudentServiceImpl implements StudentService {
 	 repository.deleteById(id);
 	 return "student delete !!"+id;
 	}
+
+	@Override
+	public List<Student> saveStudents(List<Student> students) {
+	
+		return repository.saveAll(students);
+	}
+	   public List<Student> getAllStudent(List<Student> student){
+		   
+		   return repository.findAll();
+	   }
 
 }
